@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
 import { FormField, Loader } from "../components";
+import { message } from "antd";
 
-const CreatePost = () => {
+const CreatePost = ({ darkMode }) => {
+  console.log(darkMode);
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    name: '',
-    prompt: '',
-    photo: '',
+    name: "",
+    prompt: "",
+    photo: "",
   });
 
   const [generatingImg, setGeneratingImg] = useState(false);
@@ -21,20 +23,18 @@ const CreatePost = () => {
     setForm({ ...form, prompt: randomPrompt });
   };
 
-  
-
   const generateImage = async () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
         const response = await fetch("http://localhost:8080/api/v1/dalle", {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ 
+          body: JSON.stringify({
             prompt: form.prompt,
-           }),
+          }),
         });
         const data = await response.json();
 
@@ -44,19 +44,42 @@ const CreatePost = () => {
       } finally {
         setGeneratingImg(false);
       }
-    }
-    else{
-      alert('please enter a prompt');
+    } else {
+      alert("please enter a prompt");
     }
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (form.prompt && form.photo) {
+      setLoading(true);
+      try {
+        const response = await fetch('https://localhost:8080/api/v1/post', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ...form }),
+        });
+
+        await response.json();
+        message.success('Success');
+        navigate('/');
+      } catch (err) {
+        message.error(err);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      message.error('Please generate an image with proper details');
+    }
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  
   return (
     <section className="max-w-7xl">
       <div>
@@ -75,6 +98,7 @@ const CreatePost = () => {
             placeholder="John Doe"
             value={form.name}
             handleChange={handleChange}
+            darkMode={darkMode}
           />
           <FormField
             labelName="Prompt"
@@ -85,20 +109,27 @@ const CreatePost = () => {
             handleChange={handleChange}
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
+            darkMode={darkMode}
           />
-
-          <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
+          {console.log(darkMode)}
+          <div
+            className={`relative ${
+              darkMode ? "bg-[#48484AFF] border-[#000000FF]" :"bg-gray-50 border border-gray-300 "
+            } ${
+              darkMode ? "text-gray-200" : "text-gray-900"
+            } text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center `}
+          >
             {form.photo ? (
               <img
                 src={form.photo}
                 alt={form.prompt}
-                className="w-full h-full object-contain"
+                className={` w-full h-full object-contain`}
               />
             ) : (
               <img
                 src={preview}
                 alt="preview"
-                className="w-9/12 h-9/12 object-contain opacity-40"
+                className={`w-9/12 h-9/12 object-contain opacity-40`}
               />
             )}
 
