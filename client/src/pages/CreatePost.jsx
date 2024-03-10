@@ -5,8 +5,9 @@ import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
 import { FormField, Loader } from "../components";
 import { message } from "antd";
+import Header from "../components/Header";
 
-const CreatePost = ({ darkMode }) => {
+const CreatePost = ({ darkMode,toggleDarkMode }) => {
   console.log(darkMode);
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -81,9 +82,12 @@ const CreatePost = ({ darkMode }) => {
   };
 
   return (
-    <section className="max-w-7xl">
+    <>
+     <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
+ 
+    <section className="max-w-7xl container p-5">
       <div>
-        <h1 className="font-extrabold text-[#222328] text-[32px]">Create</h1>
+        <h1 className={`font-extrabold ${darkMode?"text-[#666e75]":"text-[#222328]"} text-[32px]`}>Create</h1>
         <p className="mt-2 text-[#666e75] text-[16px] max-w[500px]">
           Create imaginative and vistually stunning images through DALL-E AI and
           share them with the community
@@ -98,7 +102,9 @@ const CreatePost = ({ darkMode }) => {
             placeholder="John Doe"
             value={form.name}
             handleChange={handleChange}
-            darkMode={darkMode}
+            // darkMode={darkMode}
+            // style={{color:"#fff"}}
+            className={`${darkMode?"text-[#666e75]":"text-[#222328]"} text-[32px]`}
           />
           <FormField
             labelName="Prompt"
@@ -164,6 +170,7 @@ const CreatePost = ({ darkMode }) => {
         </div>
       </form>
     </section>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { Card, FormField, Loader } from '../components';
+import Header from '../components/Header';
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -14,7 +15,7 @@ const RenderCards = ({ data, title }) => {
   );
 };
 
-const Home = () => {
+const Home = ({darkMode,toggleDarkMode}) => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
 
@@ -61,6 +62,9 @@ const Home = () => {
   };
 
   return (
+    <>
+     <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
+   
     <section className="max-w-7xl mx-auto">
       <div>
         <h1 className="font-extrabold text-[#222328] text-[32px]">The Community Showcase</h1>
@@ -107,6 +111,7 @@ const Home = () => {
         )}
       </div>
     </section>
+    </>
   );
 };
 
