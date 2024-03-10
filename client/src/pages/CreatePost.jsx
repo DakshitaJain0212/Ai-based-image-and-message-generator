@@ -51,11 +51,12 @@ const CreatePost = ({ darkMode }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const val = JSON.stringify({...form});
+    console.log(val);
     if (form.prompt && form.photo) {
       setLoading(true);
       try {
-        const response = await fetch('https://localhost:8080/api/v1/post', {
+        const response = await fetch('http://localhost:8080/api/v1/post', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -63,11 +64,11 @@ const CreatePost = ({ darkMode }) => {
           body: JSON.stringify({ ...form }),
         });
 
-        await response.json();
+       const res =  await response.json();
         message.success('Success');
         navigate('/');
       } catch (err) {
-        message.error(err);
+        alert(err);
       } finally {
         setLoading(false);
       }
