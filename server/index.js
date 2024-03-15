@@ -5,6 +5,7 @@ import connectDB from './mongodb/connect.js';
 import postRoutes from './routes/postRoutes.js';
 import dalleRoutes from './routes/dalleRoutes.js';
 import ChatGpt from "./routes/ChatGpt.js";
+import authroutes from "./routes/Auth.js";
 
 
 dotenv.config();
@@ -17,6 +18,9 @@ app.use(express.json({limit: '50mb'}));
 app.use('/api/v1/post', postRoutes);
 app.use('/api/v1/dalle', dalleRoutes);
 app.use('/api/chatResponse', ChatGpt);
+
+app.use('/auth', authroutes);
+
 
 
 app.get('/', async (req,res) => {

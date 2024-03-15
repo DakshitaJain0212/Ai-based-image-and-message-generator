@@ -44,6 +44,12 @@ function ChatInterface({ darkMode, toggleDarkMode }) {
   const [inputItem, setInput] = useState("");
   const [response, setResponse] = useState("");
   const [itemarr, setItemArr] = useState([]);
+  useEffect(()=>{
+    let token=localStorage.getItem('token');
+    if(!token){
+      navigate("/login");
+    }
+      },[])
   // let arr=[]
   // const handleSend=async()=>{
   //   console.log("i click");
@@ -151,6 +157,7 @@ function ChatInterface({ darkMode, toggleDarkMode }) {
         className={`w-full h-full flex flex-col md:flex-row ${
           darkMode ? "bg-black" : ""
         }`}
+        style={{height:"100vh"}}
       >
         {/* <div className={`sideBar w-full md:w-1/4 lg:w-1/5 bg-${darkMode ? 'gray-800' : 'gray-200'} text-${darkMode ? 'white' : 'black'} transition-colors duration-500`}>
         <div className="upperSide p-4">
@@ -206,7 +213,7 @@ function ChatInterface({ darkMode, toggleDarkMode }) {
         </div>
       </div> */}
 
-        <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-0">
+        {/* <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-0">
           <div className="mb-2 p-4">
             <Typography variant="h5" color="blue-gray">
               Sidebar
@@ -336,7 +343,7 @@ function ChatInterface({ darkMode, toggleDarkMode }) {
               Log Out
             </ListItem>
           </List>
-        </Card>
+        </Card> */}
 
         <div className={`main flex-9 p-4 ${darkMode ? "bg-black" : ""}`}>
           <div className={`chats space-y-4 w-full max-w-5xl`}>

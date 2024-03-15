@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -9,6 +10,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar({ darkMode, toggleDarkMode }) {
+  const navigate=useNavigate();
   const [navigation, setNavigation] = useState([
     { name: 'Community', href: '/home', current: true },
     { name: 'AnswerCraft', href: '/chat-interface', current: false },
@@ -25,6 +27,10 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
     });
     setNavigation(updatedItems);
   };
+  const signOut=()=>{
+    localStorage.removeItem('token');
+    navigate("/login")
+  }
 
   return (
     <Disclosure as="nav" className={`${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg `}>
@@ -132,12 +138,12 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <div
+                            onClick={()=>signOut()}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
-                          </a>
+                          </div>
                         )}
                       </Menu.Item>
                     </Menu.Items>
