@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 import { Card, FormField, Loader } from "../components";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const RenderCards = ({ data, title }) => {
+
   if (data?.length > 0) {
     return data.map((post) => <Card key={post._id} {...post} />);
   }
+
+
 
   return (
     <h2 className="mt-5 font-bold text-[#6469ff] text-xl uppercase">{title}</h2>
@@ -15,6 +19,7 @@ const RenderCards = ({ data, title }) => {
 };
 
 const CommunityPage = ({ darkMode, toggleDarkMode }) => {
+  const navigate= useNavigate();
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
 
@@ -22,7 +27,12 @@ const CommunityPage = ({ darkMode, toggleDarkMode }) => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState(null);
 
- 
+  useEffect(()=>{
+    let token=localStorage.getItem('token');
+    if(!token){
+      navigate("/login");
+    }
+      },[])
 
   const fetchPosts = async () => {
     setLoading(true);

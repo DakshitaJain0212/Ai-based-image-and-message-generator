@@ -5,6 +5,8 @@ import { Home, CreatePost } from "./pages";
 import ChatInterface from "./pages/ChatInterface";
 import Header from "./components/Header";
 import CommunityPage from "./pages/CommunityPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   // State variable to track dark mode
@@ -38,7 +40,16 @@ const App = () => {
             path="/chat-interface"
             element={<ChatInterface darkMode={darkMode} toggleDarkMode={toggleDarkMode}  />}
           />
+           <Route
+            path="/login"
+            element={<Login darkMode={darkMode} toggleDarkMode={toggleDarkMode}  />}
+          />
+           <Route
+            path="/register"
+            element={<Register darkMode={darkMode} toggleDarkMode={toggleDarkMode}  />}
+          />
         </Routes>
+        
       </main>
     </BrowserRouter>
   );

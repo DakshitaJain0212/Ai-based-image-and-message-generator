@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 import { preview } from "../assets";
@@ -27,6 +27,12 @@ const CreatePost = ({ darkMode,toggleDarkMode }) => {
     const randomPrompt = getRandomPrompt(form.prompt);
     setForm({ ...form, prompt: randomPrompt });
   };
+  useEffect(()=>{
+    let token=localStorage.getItem('token');
+    if(!token){
+      navigate("/login");
+    }
+      },[])
 
   const generateImage = async () => {
     if (form.prompt) {
