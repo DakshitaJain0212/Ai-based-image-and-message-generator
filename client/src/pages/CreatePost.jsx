@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 import { preview } from "../assets";
 import { getRandomPrompt } from "../utils";
 import { FormField, Loader } from "../components";
 import { message } from "antd";
-import Header from "../components/Header";
 import Navbar from '../components/Navbar'
-
-
 
 
 const CreatePost = ({ darkMode,toggleDarkMode }) => {
@@ -22,17 +18,12 @@ const CreatePost = ({ darkMode,toggleDarkMode }) => {
 
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [inputItem , setInput] = useState("");
   const handleSurpriseMe = () => {
     const randomPrompt = getRandomPrompt(form.prompt);
     setForm({ ...form, prompt: randomPrompt });
+    setInput(randomPrompt);
   };
-  useEffect(()=>{
-    let token=localStorage.getItem('token');
-    if(!token){
-      navigate("/login");
-    }
-      },[])
 
   const generateImage = async () => {
     if (form.prompt) {
@@ -88,11 +79,11 @@ const CreatePost = ({ darkMode,toggleDarkMode }) => {
     }
   };
 
-  const [input,setInput] = useState('');
+  
   const handleChange = (e) => {
     
     setForm({ ...form, [e.target.name]: e.target.value });
-    setInput(e.target.value);
+
   };
 
   return (
@@ -112,30 +103,39 @@ const CreatePost = ({ darkMode,toggleDarkMode }) => {
               </p>
               <form className="mt-12 max-w-3xl " onSubmit={handleSubmit}>
 
-              <FormField
-            labelName="Your name"
-            text="text"
-            name="name"
-            placeholder="John Doe"
-            value={form.name}
-            handleChange={handleChange}
-            darkMode={darkMode}
-            input={input}
-            setInput={setInput}
-          />
+              <label htmlFor="username" className={`block text-sm font-medium leading-6  ${darkMode ? "text-gray-400" : "text-gray-900"}`}>
+                Your Name
+              </label>
+
+              <div className="mt-2">
+                <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md" style={{width: "700px"}}>
+                  <input
+                    type='text'
+                        id='name'
+                        placeholder="John Doe"
+                        name='name'
+                        value={form.name}
+                        onChange={handleChange}
+                        required
+                    className={`block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 `}
+                    
+                  />
+                  
+                </div>
+              </div>
 
             <FormField
             labelName="Prompt"
             text="text"
             name="prompt"
             placeholder="panda mad scientist mixing sparkling chemicals, digital art"
-            value={form.prompt}
-            handleChange={handleChange}
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
             darkMode={darkMode}
-            input={input}
+            setForm={setForm}
+            form={form}
             setInput={setInput}
+            inputItem={inputItem}
           />
           
           <div className="mt-5 flex gap-5">

@@ -45,6 +45,8 @@ export default function Register() {
       }else{
         alert(response.data.message);
       }
+    }).catch((error) => {
+      alert(error.message);
     })
 
   }

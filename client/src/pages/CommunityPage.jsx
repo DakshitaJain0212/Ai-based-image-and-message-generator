@@ -60,7 +60,7 @@ const CommunityPage = ({ darkMode, toggleDarkMode }) => {
     fetchPosts();
   }, []);
 
-  const [input,setInput] = useState('');
+  const [input,setInput] = useState("");
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
@@ -145,6 +145,11 @@ const CommunityPage = ({ darkMode, toggleDarkMode }) => {
           value={searchText}
           handleChange={handleSearchChange}
           darkMode={darkMode}
+          setForm={{}}
+            form={{}}
+          setInput={setInput}
+          inputItem={input}
+           
         />
       </div>
     </div>

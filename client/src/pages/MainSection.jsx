@@ -11,10 +11,8 @@ const navigation = [
 ];
 
 export default function MainSection() {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-
 
   return (
     <div className="bg-white min-h-screen">
@@ -56,7 +54,7 @@ export default function MainSection() {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <div
-              onClick={()=>navigate("/login")}
+              onClick={() => navigate("/login")}
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Log in <span aria-hidden="true">&rarr;</span>
@@ -104,7 +102,7 @@ export default function MainSection() {
                 </div>
                 <div className="py-6">
                   <a
-                     href={`/login`}
+                    href={`/login`}
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Log in
@@ -154,13 +152,13 @@ export default function MainSection() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div
-                onClick={()=>navigate("/home")}
+                onClick={() => navigate("/home")}
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Get started
               </div>
               <a
-                href="#"
+                href="/learnmore"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Learn more <span aria-hidden="true">→</span>
