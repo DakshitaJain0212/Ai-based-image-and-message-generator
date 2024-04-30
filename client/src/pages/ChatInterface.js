@@ -100,7 +100,7 @@ function ChatInterface({ darkMode, toggleDarkMode }) {
   // }
   const openai = new OpenAI({
     // apiKey:"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",
-    apiKey: "sk-proj-6rLz0f0X44GfKsfDFVP7T3BlbkFJ27TyHg1oVU9OW15e4wQa",
+    apiKey: "sk-proj-76O7gZtP5YAl0MWFfumwT3BlbkFJKZdAxmQnjrn5klIxImNF",
     dangerouslyAllowBrowser: true,
   });
 
