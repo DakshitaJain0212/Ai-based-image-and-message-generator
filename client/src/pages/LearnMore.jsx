@@ -7,6 +7,10 @@ import {
 } from "@heroicons/react/24/outline";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import img1 from '../assets/img1.jpg';
+import img2 from '../assets/img2.jpg';
+import img3 from '../assets/img3.jpg';
+import img4 from '../assets/img4.jpg';
 
 const features = [
   {
@@ -40,20 +44,17 @@ const people = [
     {
       name: 'Dakshita Jain',
       role: 'Full Stack developer',
-      imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+     
     },
     {
         name: 'Monika Kushwah',
         role: 'Full Stack developer',
-        imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+       
     },
     {
         name: 'Mumuksha Arya',
         role: 'frontend Developer',
-        imageUrl:
-        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+       
     },
   ]
 
@@ -122,22 +123,22 @@ const LearnMore = ({ darkMode, toggleDarkMode }) => {
         </div>
         <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
           <img
-            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-01.jpg"
+            src={img1}
             alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
             className="rounded-lg bg-gray-100"
           />
           <img
-            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-02.jpg"
+            src={img2}
             alt="Top down view of walnut card tray with embedded magnets and card groove."
             className="rounded-lg bg-gray-100"
           />
           <img
-            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-03.jpg"
+            src={img3}
             alt="Side of walnut card tray with card groove and recessed card area."
             className="rounded-lg bg-gray-100"
           />
           <img
-            src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-04.jpg"
+            src={img4}
             alt="Walnut card tray filled with cards and card angled in dedicated groove."
             className="rounded-lg bg-gray-100"
           />
@@ -150,7 +151,7 @@ const LearnMore = ({ darkMode, toggleDarkMode }) => {
         <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2">
           {people.map((person) => (
             <li key={person.name} className="flex items-center gap-x-6">
-              <img className="h-16 w-16 rounded-full" src={person.imageUrl} alt="" />
+              {/* <img className="h-16 w-16 rounded-full" src={person.imageUrl} alt="" /> */}
               <div>
                 <h3 className="text-base font-semibold leading-7">{person.name}</h3>
                 <p className="text-sm font-semibold leading-6 text-indigo-600">{person.role}</p>

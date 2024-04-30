@@ -34,6 +34,7 @@ import {
   InboxIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
+import { SendOutlined } from '@ant-design/icons';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -41,9 +42,25 @@ import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import Navbar from "../components/Navbar";
 function ChatInterface({ darkMode, toggleDarkMode }) {
   const navigate = useNavigate();
+
+  console.log(darkMode);
   const [inputItem, setInput] = useState("");
   const [response, setResponse] = useState("");
   const [itemarr, setItemArr] = useState([]);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   useEffect(()=>{
     let token=localStorage.getItem('token');
     if(!token){
@@ -83,7 +100,7 @@ function ChatInterface({ darkMode, toggleDarkMode }) {
   // }
   const openai = new OpenAI({
     // apiKey:"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",
-    apiKey: "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",
+    apiKey: "sk-proj-6rLz0f0X44GfKsfDFVP7T3BlbkFJ27TyHg1oVU9OW15e4wQa",
     dangerouslyAllowBrowser: true,
   });
 
@@ -155,9 +172,9 @@ function ChatInterface({ darkMode, toggleDarkMode }) {
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <div
         className={`w-full h-full flex flex-col md:flex-row ${
-          darkMode ? "bg-black" : ""
+          darkMode ? 'bg-black' : isScrolled ? 'bg-gray-800' : ''
         }`}
-        style={{height:"100vh"}}
+        // style={{ height: '100vh' }}
       >
         {/* <div className={`sideBar w-full md:w-1/4 lg:w-1/5 bg-${darkMode ? 'gray-800' : 'gray-200'} text-${darkMode ? 'white' : 'black'} transition-colors duration-500`}>
         <div className="upperSide p-4">

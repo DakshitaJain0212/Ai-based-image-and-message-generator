@@ -1,16 +1,15 @@
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon, MoonIcon, SunIcon } from '@heroicons/react/24/outline';
-import { useNavigate,Link } from 'react-router-dom';
-
-
+import { useNavigate, Link } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function Navbar({ darkMode, toggleDarkMode }) {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+
   const [navigation, setNavigation] = useState([
     { name: 'Community', href: '/home', current: true },
     { name: 'AnswerCraft', href: '/chat-interface', current: false },
@@ -27,10 +26,11 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
     });
     setNavigation(updatedItems);
   };
-  const signOut=()=>{
+
+  const signOut = () => {
     localStorage.removeItem('token');
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   return (
     <Disclosure as="nav" className={`${darkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg `}>
@@ -52,24 +52,24 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex-shrink-0 flex items-center">
                   <Link to="/">
-                  <img
-                    className="block lg:hidden h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                    alt="Workflow"
-                  />
-                  <img
-                    className="hidden lg:block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                    alt="Workflow"
-                  />
+                    <img
+                      className="block lg:hidden h-8 w-auto"
+                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                      alt="Workflow"
+                    />
+                    {/* <img
+                      className="hidden lg:block h-8 w-auto"
+                      src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                      alt="Workflow"
+                    /> */}
                   </Link>
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
                         onClick={() => handleCurrent(item)}
                         className={classNames(
                           item.current ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-700 hover:text-white',
@@ -78,7 +78,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#"
@@ -137,11 +137,11 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
                             Settings
                           </a>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
                       <Menu.Item>
                         {({ active }) => (
                           <div
-                            onClick={()=>signOut()}
+                            onClick={signOut}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out

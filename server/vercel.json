@@ -1,0 +1,47 @@
+{
+    "builds": [
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes" : [
+        {
+            "src": "/api/v1/post",
+            "dest":"index.js"
+        },
+        {
+            "src": "/api/v1/post/(.*)",
+            "dest": "index.js"
+        },
+        {
+            "src": "/api/v1/dalle",
+            "dest":"index.js"
+        },
+        {
+            "src": "/api/v1/dalle/(.*)",
+            "dest": "index.js"
+        },
+        {
+            "src": "/api/chatResponse",
+            "dest":"index.js"
+        },
+        {
+            "src": "/api/chatResponse/(.*)",
+            "dest": "index.js"
+        }, 
+        {
+            "src": "/auth",
+            "dest":"index.js"
+        },
+        {
+            "src": "/auth/(.*)",
+            "dest": "index.js"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/" 
+        }
+    ]
+  }
+  
